@@ -51,7 +51,7 @@
 | preparation_day    | integer  | null:false |
 | shipping_region    | integer  | null:false |
 | selling_price      | integer  | null:false |
-| explanation        | integer  | null:false |
+| explanation        | text     | null:false |
 | user_id            | integer  | null:false, foreign_key: true |
 
 ### Association
@@ -69,6 +69,6 @@
 
 ### Association
 
-- belongs_to :items
+- belongs_to :item
 - belongs_to :user
 - has_one :sending_destination
