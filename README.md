@@ -5,6 +5,7 @@
 
 | Column            | Type      | Options     |
 | ---------------   | --------- | ----------- |
+| nick_name         | string    | null:false  |
 | first_name        | string    | null:false  |
 | family_name       | string    | null:false  |
 | first_name_kana   | string    | null:false  |
@@ -42,14 +43,15 @@
 
 | Column             | Type     | Options    |
 | ------------------ | -------- | ---------- |
-| item_img           | integer  | null:false |
-| item_name          | integer  | null:false |
+| image              | string   | null:false |
+| name               | string   | null:false |
 | category           | integer  | null:false |
-| item_condition     | integer  | null:false |
+| condition          | integer  | null:false |
 | postage_type       | integer  | null:false |
 | preparation_day    | integer  | null:false |
 | shipping_region    | integer  | null:false |
 | selling_price      | integer  | null:false |
+| explanation        | integer  | null:false |
 | user_id            | integer  | null:false, foreign_key: true |
 
 ### Association
