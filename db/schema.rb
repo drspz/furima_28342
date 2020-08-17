@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_14_235842) do
+ActiveRecord::Schema.define(version: 2020_08_17_022656) do
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "image", null: false
+    t.string "name", null: false
+    t.integer "category", null: false
+    t.integer "condition", null: false
+    t.integer "postage_type", null: false
+    t.integer "preparation_day", null: false
+    t.integer "shipping_region", null: false
+    t.integer "selling_price", null: false
+    t.text "explanation", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "nick_name", null: false
+    t.string "first_name", null: false
+    t.string "family_name", null: false
+    t.string "first_name_kana", null: false
+    t.string "family_name_kana", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.date "birth", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
