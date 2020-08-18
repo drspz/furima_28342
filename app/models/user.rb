@@ -6,11 +6,11 @@ class User < ApplicationRecord
   has_many :items
  with_options presence: true do
     validates :nick_name
-    validates :first_name
-    validates :family_name
-    validates :first_name_kana
-    validates :family_name_kana
-    validates :email
+    validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "は全角で入力してください。"}
+    validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "は全角で入力してください。"}
+    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力して下さい。"}
+    validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力して下さい。"}
+    validates :email, uniqueness: true
     validates :password
     validates :password_confirmation
     validates :birth
