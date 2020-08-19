@@ -30,8 +30,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @nickname = current_user.nick_name
     @user = current_user.users
 
   end
