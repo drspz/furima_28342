@@ -4,39 +4,38 @@ class ItemsController < ApplicationController
 
 
   def index
-    @user = User.all
+    @items = Item.all
   end
 
   def new
-    @user = User.new
+    @item = Item.new
   end
 
   def create
-    User.create(user_params)
+    Item.create(item_params)
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.destroy
+    item = Item.find(params[:id])
+    item.destroy
   end
 
   def update
-    user = Tweet.find(params[:id])
-    user.update(user_params)
+    item = Item.find(params[:id])
+    item.update(item_params)
   end
 
   def edit
-    @user = User.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def show
-    @user = current_user.users
-
+    @item = Item.find(params[:id])
   end
 
   private
-  def user_params
-    params.require(:user).permit(:image, :text).merge(user_id: current_user.id)
+  def item_params
+    params.require(:item).permit(:image, :text, :name).merge(user_id: current_user.id)
   end
 
 
