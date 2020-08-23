@@ -1,12 +1,8 @@
 require 'rails_helper'
 
-# RSpec.describe Item, type: :model do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
-
 describe Item do
   before do
-    @user = FactoryBot.build(:item)
+    @item = FactoryBot.build(:item)
   end
 
   describe '出品商品登録' do
@@ -24,51 +20,58 @@ describe Item do
       end
 
       it "explanationが空では登録できない" do
-      @item.explanation = ""
+      @item.explanation = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
 
       it "category_idが空では登録できない" do
-      @item.ategory_id = ""
+      @item.category_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category_id can't be blank")
+      expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it "condition_idが空では登録できない" do
-      @item.condition_id = ""
+      @item.condition_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Condition_id can't be blank")
+      expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
 
       it "postage_type_idが空では登録できない" do
-      @item.postage_type_id = ""
+      @item.postage_type_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Postage_type_id can't be blank")
+      expect(@item.errors.full_messages).to include("Postage_type can't be blank")
       end
 
       it "shipping_region_idが空では登録できない" do
-      @item.hipping_region_id = ""
+      @item.shipping_region_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shipping_region_id can't be blank")
+      expect(@item.errors.full_messages).to include("Shipping_region can't be blank")
       end
 
       it "preparation_day_idが空では登録できない" do
-      @item.preparation_day_id = ""
+      @item.preparation_day_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Preparation_day_id can't be blank")
+      expect(@item.errors.full_messages).to include("Preparation_day can't be blank")
       end
 
       it "selling_priceが空では登録できない" do
-      @item.selling_price = ""
+      @item.selling_price = ''
       @item.valid?
       expect(@item.errors.full_messages).to include("Selling_price can't be blank")
       end
 
-      it "selling_priceが300~9999999円でないと登録できない" do
-      @item.selling_price = ""
+      it "selling_priceが299円以下でないと登録できない" do
+      @item.selling_price = "299"
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling_price is greater than 300 and less than9999999")
+      expect(@item.errors.full_messages).to include("Selling_price is too short (minimum is 300 characters) ")
+      end
+
+      it "selling_priceが10000000円以上でないと登録できない" do
+      @item.selling_price = "10000000"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Selling_price  is too long (maximum is 9999999 characters)")
       end
     end
   end
+end
