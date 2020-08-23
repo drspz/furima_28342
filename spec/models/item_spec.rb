@@ -18,51 +18,57 @@ describe Item do
 
    context '出品商品登録がうまくいかないとき' do
       it "nameが空では登録できない" do
-      @item.email = ""
+      @item.name = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Name can't be blank")
       end
 
       it "explanationが空では登録できない" do
-      @item.email = ""
+      @item.explanation = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
 
       it "category_idが空では登録できない" do
-      @item.email = ""
+      @item.ategory_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Category_id can't be blank")
       end
 
       it "condition_idが空では登録できない" do
-      @item.email = ""
+      @item.condition_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Condition_id can't be blank")
       end
 
       it "postage_type_idが空では登録できない" do
-      @item.email = ""
+      @item.postage_type_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Postage_type_id can't be blank")
       end
 
       it "shipping_region_idが空では登録できない" do
-      @item.email = ""
+      @item.hipping_region_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Shipping_region_id can't be blank")
       end
 
       it "preparation_day_idが空では登録できない" do
-      @item.email = ""
+      @item.preparation_day_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Preparation_day_id can't be blank")
       end
 
       it "selling_priceが空では登録できない" do
-      @item.email = ""
+      @item.selling_price = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Selling_price can't be blank")
+      end
+
+      it "selling_priceが300~9999999円でないと登録できない" do
+      @item.selling_price = ""
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Selling_price is greater than 300 and less than9999999")
       end
     end
   end
