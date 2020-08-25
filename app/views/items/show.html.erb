@@ -7,7 +7,9 @@
       <%= "商品名" %>
     </h2>
     <div class='item-img-content'>
-      <%= image_tag "item-sample.png" ,class:"item-box-img" %>
+      <%# <%= image_tag "item-sample.png" ,class:"item-box-img" %> 
+      <%= image_tag @item.image.variant(resize:'200x200'), class: 'item-img-content'  %>
+
       <%# 商品が売れている場合は、sold outの表示をしましょう。 %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
@@ -25,7 +27,7 @@
 
     <%# ログインしていて、なおかつ、ログインしているユーザと出品しているユーザが同一人物でないとき表示しましょう。 %>
 
-    <%= link_to '商品の編集', "#", method: :get, class: "item-red-btn" %>
+    <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
     <p class='or-text'>or</p>
     <%= link_to '削除', "#", method: :delete, class:'item-destroy' %>
 
