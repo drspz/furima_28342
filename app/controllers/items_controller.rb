@@ -20,26 +20,30 @@ class ItemsController < ApplicationController
     end
   end
 
+
   
-
-  def destroy
-    if item = Item.find(params[:id])
-       item.destroy
-       redirect_to root_path
-    else
-       render :edit
-    end
-  end
-
   def update
-     if item = Item.find(params[:id])
-        item.update(item_params)
-        redirect_to root_path
-     else
-         render :edit
-     end
-    
+    item = Item.find(params[:id])
+    item.update(item_params)
+   if user_signed_in? && current_user.id == item.user_id 
+    redirect_to root_path
+   end  
   end
+
+
+
+
+   def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    if user_signed_in? && current_user.id == item.user_id 
+     redirect_to root_path
+    end  
+   end
+
+
+
+  
 
   def edit
     @item = Item.find(params[:id])
