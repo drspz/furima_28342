@@ -21,29 +21,19 @@ class ItemsController < ApplicationController
       render :new
     end
   end
-
-
   
-  def update
-    @item.update(item_params)
+  def update 
    if user_signed_in? && current_user.id == @item.user_id 
+    @item.update(item_params)
     redirect_to root_path
    end  
   end
 
   def destroy
-    if user_signed_in? && current_user.id == @item.user_id 
-      @item.destroy
-     redirect_to root_path
-    end  
-  end
-
-  def destroy
-    item = Item.find(params[:id])
-    item.destroy
-    if user_signed_in? && current_user.id == item.user_id 
-     redirect_to root_path
-    end  
+   if user_signed_in? && current_user.id == @item.user_id 
+    @item.destroy
+    redirect_to root_path
+   end  
   end
 
   def edit
