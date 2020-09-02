@@ -1,12 +1,14 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:update, :destroy]
-
   #before_action :authenticate_user!, expect: :index
 
 
   def index
     @items = Item.all
+    # if user_signed_in? && current_user.id && @item.purchase.id! == current_user.id
+    #   redirect_to root_path
+    # end
   end
 
   def new
@@ -59,4 +61,5 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
 end
