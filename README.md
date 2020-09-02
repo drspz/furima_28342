@@ -22,7 +22,7 @@
 
 
 
-## sending_destinations  テーブル
+## orders  テーブル
 
 | Column                      | Type       | Options    |
 | --------------------------- | ---------- | ---------- |
@@ -72,4 +72,4 @@
 
 - belongs_to :item
 - belongs_to :user
-- has_one :sending_destination
+- has_one :order
