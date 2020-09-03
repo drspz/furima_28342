@@ -37,6 +37,16 @@ RSpec.describe OrderPurchase, type: :model do
       @order_purchase.building_name = nil
       expect(@order_purchase).to be_valid
     end
+    it "phone_numberが11桁以上であれば保存できないこと" do
+      @user.phone_number = "12345678912"
+      @order_purchase.valid?
+      expect(@user.errors.full_messages).to include("Phone number is too lomg (maximum is 11 characters)")
+    end
+    it 'phone_numberは空だと保存できない' do
+      @order_purchase.phone_number = nil
+      @order_purchase.valid?
+      expect(@order_purchase.errors.full_messages).to include("Phone number can't be blank")
+    end
     
   end
 end

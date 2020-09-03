@@ -1,14 +1,13 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:update, :destroy]
+  before_action :redirect_show, only: [:show]
+
   #before_action :authenticate_user!, expect: :index
 
 
   def index
     @items = Item.all
-    # if user_signed_in? && current_user.id && @item.purchase.id! == current_user.id
-    #   redirect_to root_path
-    # end
   end
 
   def new
@@ -43,7 +42,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   private
@@ -55,6 +53,13 @@ class ItemsController < ApplicationController
   def move_to_index
     unless user_signed_in?
       redirect_to action: :index
+    end
+  end
+
+  def redirect_show
+    @item = Item.find(params[:id])
+    if @item.purchase 
+       redirect_to root_path
     end
   end
 

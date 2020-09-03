@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
   before_action :move_to_order, except: [:index]
-  before_action :redirect_to_root, only: [:index]
   before_action :authenticate_user!, expect: [:index]
+  before_action :redirect_to_root, only: [:index]
+  
+  # before_action :redirect_to_new, only: [:new, :create]
 
 
   def index
@@ -9,22 +11,15 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @Purchase = OrderPurchase.new
-    @item = Item.find(params[:item_id]) 
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end  
+    @item = Item.find(params[:item_id])
+    @Purchase = OrderPurchase.new   
   end
  
 
   
   def create
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end
-    
-   @Purchase = OrderPurchase.new(order_params)
+    @Purchase = OrderPurchase.new(order_params)
    if @Purchase.valid?
      pay_item
      @Purchase.save
@@ -49,6 +44,14 @@ class OrdersController < ApplicationController
       redirect_to root_path
     end
   end
+
+
+  # def redirect_new
+  #   @item = Item.find(params[:item_id])
+  #   if @item.purchase 
+  #      redirect_to root_path
+  #   end
+  # end
 
 
 
