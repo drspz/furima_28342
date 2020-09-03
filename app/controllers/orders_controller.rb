@@ -1,17 +1,15 @@
 class OrdersController < ApplicationController
   before_action :move_to_order, except: [:index]
+  before_action :set_item, only: [:index, :new]
   before_action :authenticate_user!, expect: [:index]
   before_action :redirect_to_root, only: [:index]
   
-  # before_action :redirect_to_new, only: [:new, :create]
 
 
   def index
-    @item = Item.find(params[:item_id])
   end
 
   def new
-    @item = Item.find(params[:item_id])
     @Purchase = OrderPurchase.new   
   end
  
@@ -31,6 +29,10 @@ class OrdersController < ApplicationController
 
   private
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 
   def move_to_order
     unless user_signed_in?
@@ -44,15 +46,6 @@ class OrdersController < ApplicationController
       redirect_to root_path
     end
   end
-
-
-  # def redirect_new
-  #   @item = Item.find(params[:item_id])
-  #   if @item.purchase 
-  #      redirect_to root_path
-  #   end
-  # end
-
 
 
   def order_params
