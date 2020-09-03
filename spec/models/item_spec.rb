@@ -6,7 +6,6 @@ describe Item do
   end
 
   describe '出品商品登録' do
-   context '出品商品登録がうまくいくとき' do
        it "nameとexplanation、category_idとcondition_id,postage_type_id,shipping_region_id,preparation_day_id,selling_priceなどが存在すれば登録できること" do
        expect(item).to be_valid
        end
@@ -56,21 +55,21 @@ describe Item do
       end
 
       it "selling_priceが空では登録できない" do
-      @item.selling_price = ''
+      @item.selling_price = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Selling_price can't be blank")
       end
 
-      it "selling_priceが299円以下でないと登録できない" do
+      it "selling_priceが300円未満でないと登録できない" do
       @item.selling_price = "299"
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling_price is too short (minimum is 300 characters) ")
+      expect(@item.errors.full_messages).to include("Selling_price is out of setting range")
       end
 
-      it "selling_priceが10000000円以上でないと登録できない" do
-      @item.selling_price = "10000000"
+      it "selling_priceが10000000円を超過すると登録できない" do
+      @item.selling_price = 10000001
       @item.valid?
-      expect(@item.errors.full_messages).to include("Selling_price  is too long (maximum is 9999999 characters)")
+      expect(@item.errors.full_messages).to include("Selling_price is out of setting range")
       end
     end
   end

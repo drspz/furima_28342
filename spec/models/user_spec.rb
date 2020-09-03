@@ -49,31 +49,31 @@ describe User do
       end
 
       it 'first_nameが全角でないと登録できない' do
-      @user = build(:user, first_name: "zenkaku")
+      @user.first_name = "サトウ"
       @user.valid?
-      expect(@user.errors[:first_name_kana]).to include("は全角で入力してください")
+      expect(@user.errors.full_messages).to include("First_name reading is invalid. Input full-width characters.")
       end
 
       it 'family_nameが全角でないと登録できない' do
-      @user = build(:user, family_name: "kana")
+      @user.family_name = "タロウ"
       @user.valid?
-      expect(@user.errors[:family_name]).to include("は全角で入力してください")
+      expect(@user.errors.full_messages).to include("Family_name reading is invalid. Input full-width characters.")
       end
 
       it 'first_name_kanaがカタカナでないと登録できない' do
-      @user = build(:user, first_name_kana: "kana")
+      @user.first_name_kana = "サトウ"
       @user.valid?
-      expect(@user.errors[:first_name_kana]).to include("はカタカナで入力してください")
+      expect(@user.errors.full_messages).to include("First_name reading is invalid. Input full-width katakana characters")
       end
 
       it 'family_name_kanaがカタカナでないと登録できない' do
-      @user = build(:user, family_name_kana: "kana")
+      @user.family_name_kana = "タロウ"
       @user.valid?
-      expect(@user.errors[:family_name_kana]).to include("はカタカナで入力してください")
+      expect(@user.errors.full_messages).to include("Family_name reading is invalid. Input full-width katakana characters")
       end
 
       it "birthが空では登録できない" do
-      @user.email = ""
+      @user.birth = nil
       @user.valid?
       expect(@user.errors.full_messages).to include("Birth can't be blank")
       end
@@ -108,7 +108,7 @@ describe User do
       it "emailが@を含んでいないと登録できない" do
       @user.email = ""
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email can't be include @")
+      expect(@user.errors.full_messages).to include("Postal code is invalid. Include (@)")
       end
       it "passwordが半角英数字混合でないと登録できない" do
       @user.password = ""

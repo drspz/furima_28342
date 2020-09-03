@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :set_item, only: [:update, :destroy]
+  before_action :redirect_show, only: [:show]
 
   #before_action :authenticate_user!, expect: :index
 
@@ -41,7 +42,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   private
@@ -56,7 +56,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def redirect_show
+    @item = Item.find(params[:id])
+    if @item.purchase 
+       redirect_to root_path
+    end
+  end
+
   def set_item
     @item = Item.find(params[:id])
   end
+
 end
