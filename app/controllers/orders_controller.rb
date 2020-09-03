@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :move_to_order, except: [:index]
-  before_action :set_item, only: [:index, :new]
+  before_action :set_item, only: [:index, :new, :create]
   before_action :authenticate_user!, expect: [:index]
   before_action :redirect_to_root, only: [:index]
   
@@ -16,7 +16,6 @@ class OrdersController < ApplicationController
 
   
   def create
-    @item = Item.find(params[:item_id])
     @Purchase = OrderPurchase.new(order_params)
    if @Purchase.valid?
      pay_item
