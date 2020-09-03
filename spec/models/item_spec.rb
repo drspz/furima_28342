@@ -6,7 +6,6 @@ describe Item do
   end
 
   describe '出品商品登録' do
-   context '出品商品登録がうまくいくとき' do
        it "nameとexplanation、category_idとcondition_id,postage_type_id,shipping_region_id,preparation_day_id,selling_priceなどが存在すれば登録できること" do
        expect(item).to be_valid
        end

@@ -1,21 +1,16 @@
 class OrderPurchase
 
   include ActiveModel::Model
-  attr_accessor :token,  :post_code, :prefecture_code_id, :city, :house_number, :building_name, :phone_number, :purchase_id, :item_id, :user_id
+  attr_accessor :price, :token,  :post_code, :prefecture_code_id, :city, :house_number, :building_name, :phone_number, :purchase_id, :item_id, :user_id
 
   # 空の投稿を保存できないようにする
   with_options presence: true do
     validates :prefecture_code_id
-    # validates :selling_price
     validates :post_code 
     validates :house_number
     validates :token
-    # validates :building_name
     validates :phone_number
-    # validates :card_number
-    # validates :card_month
-    # validates :card_year
-    # validates :card_security
+    validates :city
   end
 
   #ジャンルの選択が「---」の時は保存できないようにする
